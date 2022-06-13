@@ -22,64 +22,24 @@ make run
 
 ### Complie API with partial evaluation
 ```
-USER=JACK envsubst < query.json | curl -ks https://localhost:8181/v1/compile?pretty -H 'Content-Type: application/json' -d @-
-```
-
-```
-USER=JOHN envsubst < query.json | curl -ks https://localhost:8181/v1/compile?pretty -H 'Content-Type: application/json' -d @-
+USER=user1 MC=mc-test-1 envsubst < query_clusterns_unknown.json | curl -ks https://localhost:8181/v1/compile?pretty -H 'Content-Type: application/json' -d @-
 ```
 
 ### Data API
 
-Allowed cluster:
-
-Specify `USER`, `CLUSTER` and `KUBECONFIG` environment variables:
-
-```
-USER=JACK CLUSTER=cluster1 KUBECONFIG=$HUB1_CONFIG ./check_cluster.sh
-```
-
-SOD:
-
-```
-curl -ks https://localhost:8181/v1/data/rbac/sod/verify?pretty -H 'Content-Type: application/json'
-curl -ks https://localhost:8181/v1/data/rbac/sod/has_violation?pretty -H 'Content-Type: application/json'
-curl -ks https://localhost:8181/v1/data/rbac/sod/violation?pretty -H 'Content-Type: application/json'
-```
 
 Data:
 
 ```
-curl -ks https://localhost:8181/v1/data/roles/developer?pretty -H 'Content-Type: application/json'
-curl -ks https://localhost:8181/v1/data/roleBindings/JACK?pretty -H 'Content-Type: application/json'
+curl -ks https://localhost:8181/v1/data/permissions?pretty -H 'Content-Type: application/json'
 ```
 
 Update data:
 
 ```
-ROLE=SRE envsubst < patch_role_binding.json | curl -k -X PATCH https://localhost:8181/v1/data/roleBindings/JACK -H 'Content-Type: application/json'  -d @- 
+USER=user55 envsubst < patch_ns_access.json | curl -k -X PATCH https://localhost:8181/v1/data/permissions -H 'Content-Type: application/json'  -d @- 
 ```
 
-## Evaluate individual rules
-
-```
-opa eval -d testdata -d roles.rego --format=pretty 'data.rbac.roles.inherited_role[["highClearanceDevops",r]]'
-```
-
-Output:
-```
-data.rbac.roles.inherited_role[["highClearanceDevops",r]]
-+-----------------------+-----------------------------------------------------------+
-|           r           | data.rbac.roles.inherited_role[["highClearanceDevops",r]] |
-+-----------------------+-----------------------------------------------------------+
-| "highClearanceDevops" | ["highClearanceDevops","highClearanceDevops"]             |
-| "devops"              | ["highClearanceDevops","devops"]                          |
-| "highClearance"       | ["highClearanceDevops","highClearance"]                   |
-| "SRE"                 | ["highClearanceDevops","SRE"]                             |
-| "developer"           | ["highClearanceDevops","developer"]                       |
-+-----------------------+-----------------------------------------------------------+
-
-```
 
 ## Test
 

@@ -1,0 +1,13 @@
+[
+	{
+		"op": "add",
+		"path": "-",
+		"value": {
+			"user" : "$USER",
+			"managedcluster" : "mc-test-1",
+			"namespaces" : [ "ns1"],
+			"role" : "admin"
+		}
+	}
+]
+

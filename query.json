@@ -1,7 +1,0 @@
-{
- "query": "data.rbac.clusters.allow == true",
-  "input": {
-    "user": "$USER"
-  },
-  "unknowns": [ "input.cluster" ]
-}

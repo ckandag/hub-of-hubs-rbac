@@ -1,0 +1,8 @@
+{
+  "query": "data.rbac.clusternamespaces.allow == true",
+  "input": {
+    "user": "$USER",
+    "managedcluster": "$MC"
+  },
+  "unknowns": [ "input.namespace" ]
+}
