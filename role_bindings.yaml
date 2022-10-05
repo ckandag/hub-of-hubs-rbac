@@ -1,7 +1,0 @@
-roleBindings:
-  "system:serviceaccount:open-cluster-management:console-chart":
-    roles:
-      - admin
-  "kube:admin":
-    roles:
-      - admin

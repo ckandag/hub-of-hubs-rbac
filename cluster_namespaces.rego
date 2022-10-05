@@ -11,10 +11,10 @@ allow {
 }
 
 access_allowed[[user, managedcluster, namespace]] {
-    some i
-	user := data.permissions[i].user
-    managedcluster := data.permissions[i].managedcluster
-	namespace = data.permissions[i].namespaces[_]    
+    some i, j
+    user := data.policyrolebindings[i].acl[j].user
+    managedcluster := data.policyrolebindings[i].acl[j].managedcluster
+    namespace = data.policyrolebindings[i].acl[j].namespace
 }
 
 

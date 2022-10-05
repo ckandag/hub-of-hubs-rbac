@@ -1,9 +1,0 @@
-{
-    "roles": {
-	"admin": {}
-    },
-
-    "clusterSets": {
-	"default":  ["*"]
-    }
-}
